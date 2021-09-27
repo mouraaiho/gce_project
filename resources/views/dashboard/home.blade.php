@@ -9,7 +9,7 @@
 </header>
 
 <div class="page-heading">
-    <h3>Profile Statistics</h3>
+    <h3>الصفحة الرئيسية</h3>
 </div>
 <div class="page-content">
     <section class="row">
@@ -20,12 +20,12 @@
                         <div class="card-body px-3 py-4-5">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <div class="stats-icon purple">
+                                    <div class="stats-icon green">
                                         <i class="iconly-boldShow"></i>
                                     </div>
                                 </div>
                                 <div class="col-md-8">
-                                    <h6 class="text-muted font-semibold">Profile Views</h6>
+                                    <h6 class="text-muted font-semibold">عدد المشتركين</h6>
                                     <h6 class="font-extrabold mb-0">112.000</h6>
                                 </div>
                             </div>
@@ -37,12 +37,12 @@
                         <div class="card-body px-3 py-4-5">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <div class="stats-icon blue">
+                                    <div class="stats-icon purple">
                                         <i class="iconly-boldProfile"></i>
                                     </div>
                                 </div>
                                 <div class="col-md-8">
-                                    <h6 class="text-muted font-semibold">Followers</h6>
+                                    <h6 class="text-muted font-semibold">عدد العدادات</h6>
                                     <h6 class="font-extrabold mb-0">183.000</h6>
                                 </div>
                             </div>
@@ -54,12 +54,12 @@
                         <div class="card-body px-3 py-4-5">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <div class="stats-icon green">
+                                    <div class="stats-icon blue">
                                         <i class="iconly-boldAdd-User"></i>
                                     </div>
                                 </div>
                                 <div class="col-md-8">
-                                    <h6 class="text-muted font-semibold">Following</h6>
+                                    <h6 class="text-muted font-semibold">الاستهلاك الكلي</h6>
                                     <h6 class="font-extrabold mb-0">80.000</h6>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8">
-                                    <h6 class="text-muted font-semibold">Saved Post</h6>
+                                    <h6 class="text-muted font-semibold">الفواتير الغير مؤذات</h6>
                                     <h6 class="font-extrabold mb-0">112</h6>
                                 </div>
                             </div>
