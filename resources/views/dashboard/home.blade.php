@@ -84,6 +84,59 @@
                     </div>
                 </div>
             </div>
+            <section class="section">
+                    <div class="row" id="table-head">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Table head options</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <p>Similar to tables and dark tables, use the modifier classes <code class="highlighter-rouge">.thead-light</code> or <code class="highlighter-rouge">.thead-dark</code> to
+                                            make <code class="highlighter-rouge">&lt;thead&gt;</code>s appear light or
+                                            dark gray.
+                                        </p>
+                                    </div>
+                                    <!-- table head dark -->
+                                    <div class="table-responsive">
+                                        <table class="table table-striped" id="table1">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th>رقم الفاتورة</th>
+                                                    <th>رقم العداد</th>
+                                                    <th>البطاقة الوطنية</th>
+                                                    <th>اسم المشرك</th>
+                                                    <th>مبلغ الاشتراك</th>
+                                                    <th>شهر الاستهلاك</th>
+                                                    <th>الاستهلاك الشهري</th>
+                                                    <th>ثمن الفاتورة</th>
+                                                    <th>اداء الفاتورة</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                              @foreach($data as $d)
+                                                <tr>
+                                                    <td>{{ $d->inumber }}</td>
+                                                    <td>{{ $d->cnumber }}</td>
+                                                    <td>{{ $d->cin }}</td>
+                                                    <td>{{ $d->name }}</td>
+                                                    <td>{{ $d->subscription_fees }}</td>
+                                                    <td>{{ $d->month .'/'. $d->year }}</td>
+                                                    <td>{{ $d->value }}</td>
+                                                    <td>{{ $d->price }}</td>
+                                                    <td>{{ ($d->status) ? 'مؤذات' : 'غير مؤذات' }}</td>
+                                                    <td><a href="#"><i class="badge-circle badge-circle-light-secondary font-medium-1" data-feather="mail"></i></a></td>
+                                                </tr>
+                                              @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             <div class="row">
                 <div class="col-12">
                     <div class="card">
