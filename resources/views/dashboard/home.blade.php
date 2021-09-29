@@ -110,7 +110,7 @@
                                                   </tr>
                                               </thead>
                                               <tbody>
-                                                @foreach($data as $d)
+                                                @foreach($data['result'] as $d)
                                                   <tr>
                                                       <td>{{ $d->inumber }}</td>
                                                       <td>{{ $d->cnumber }}</td>
