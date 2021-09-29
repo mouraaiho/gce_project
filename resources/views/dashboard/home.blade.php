@@ -126,6 +126,15 @@
                                                 @endforeach
                                               </tbody>
                                           </table>
+                                          <nav aria-label="Page navigation example">
+                                                <ul class="pagination pagination-primary">
+                                                    <?php for($i = 1 ; $i <= $data['totalPages']; $i++){ ?>
+                                                        <?php if ($i >= $currPage -2 && $i <= $currPage +2){ ?>
+                                                            <li class="page-item {{ ( $i == $currPage) ? 'active':'' }}"><a class="page-link" href="#">{{ $i }}</a></li>
+                                                        <?php } ?>
+                                                    <?php } ?>
+                                                </ul>
+                                            </nav>
                                       </div>
                                     </div>
                                 </div>
