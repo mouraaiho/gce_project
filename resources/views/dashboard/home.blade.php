@@ -93,8 +93,7 @@
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
-                                      <!-- table head dark -->
-                                      <div class="table-responsive">
+                                      <div class="table-responsive" id="dataupdate">
                                           <table class="table table-striped" id="table1">
                                               <thead class="thead-dark">
                                                   <tr>
@@ -130,7 +129,7 @@
                                                 <ul class="pagination pagination-primary">
                                                     <?php for($i = 1 ; $i <= $data['totalPages']; $i++){ ?>
                                                         <?php if ($i >= $currPage -2 && $i <= $currPage +2){ ?>
-                                                            <li class="page-item {{ ( $i == $currPage) ? 'active':'' }}"><a class="page-link" href="#">{{ $i }}</a></li>
+                                                            <li class="page-item {{ ( $i == $currPage) ? 'active':'' }}"><a class="page-link pageNumber" value="{{ $i }}" href="">{{ $i }}</a></li>
                                                         <?php } ?>
                                                     <?php } ?>
                                                 </ul>

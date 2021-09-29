@@ -12,3 +12,5 @@
 */
 
 Route::get('/dashboard','DashboardController@index');
+
+Route::get('/dashboard/getunpaidinvoices', 'AjaxController@UnpaidInvoices');
