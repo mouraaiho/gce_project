@@ -1,5 +1,5 @@
-@extends('layout', ['current_menu' => 'dashboard'])
-@section('Title', 'dashboard')
+@extends('layout', ['current_menu' => 'client'])
+@section('Title', 'Client List')
 @section('content')
 
 <header class="mb-3">
@@ -9,7 +9,7 @@
 </header>
 
 <div class="page-heading">
-    <h3>الصفحة الرئيسية</h3>
+    <h3>المشتركين</h3>
 </div>
 <div class="page-content">
     <section class="row">
@@ -89,7 +89,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">لائحة الفواتير الغير مؤذات</h4>
+                                    <h4 class="card-title">لائحة المشتركين</h4>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
@@ -97,36 +97,35 @@
                                           <table class="table table-striped" id="table1">
                                               <thead class="thead-dark">
                                                   <tr>
-                                                      <th>رقم الفاتورة</th>
-                                                      <th>رقم العداد</th>
                                                       <th>البطاقة الوطنية</th>
                                                       <th>اسم المشرك</th>
+                                                      <th>العنوان</th>
+                                                      <th>رقم الهاتف</th>
                                                       <th>مبلغ الاشتراك</th>
-                                                      <th>شهر الاستهلاك</th>
-                                                      <th>الاستهلاك الشهري</th>
-                                                      <th>ثمن الفاتورة</th>
-                                                      <th>اداء الفاتورة</th>
+                                                      <th>تاريخ الاشتراك</th>
+                                                      <th>اختيارات</th>
                                                   </tr>
                                               </thead>
                                               <tbody>
-                                                @foreach($data['invoices']['result'] as $d)
+                                                @foreach($data['clients']['result'] as $d)
                                                   <tr>
-                                                      <td>{{ $d->inumber }}</td>
-                                                      <td>{{ $d->cnumber }}</td>
                                                       <td>{{ $d->cin }}</td>
                                                       <td>{{ $d->name }}</td>
+                                                      <td>{{ $d->address }}</td>
+                                                      <td>{{ $d->phone }}</td>
                                                       <td>{{ $d->subscription_fees }}</td>
-                                                      <td>{{ $d->month .'/'. $d->year }}</td>
-                                                      <td>{{ $d->value }}</td>
-                                                      <td>{{ $d->price }}</td>
-                                                      <td>{{ ($d->status) ? 'مؤذات' : 'غير مؤذات' }}</td>
+                                                      <td>{{ $d->subscription_date }}</td>
+                                                      <td>
+                                                          <a href="{{ URL::route('client.edit') }}" class="btn btn-success">تحين</a>
+                                                          <a href="{{ URL::route('client.delete') }}" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger">حذف</a>
+                                                      </td>
                                                   </tr>
                                                 @endforeach
                                               </tbody>
                                           </table>
-                                          <nav aria-label="Page navigation example">
+                                            <nav aria-label="Page navigation example">
                                                 <ul class="pagination pagination-primary">
-                                                    <?php for($i = 1 ; $i <= $data['invoices']['totalPages']; $i++){ ?>
+                                                    <?php for($i = 1 ; $i <= $data['clients']['totalPages']; $i++){ ?>
                                                         <?php if ($i >= $data['currPage'] -2 && $i <= $data['currPage'] +2){ ?>
                                                             <li class="page-item {{ ( $i == $data['currPage']) ? 'active':'' }}"><a class="page-link pageNumber" value="{{ $i }}" href="">{{ $i }}</a></li>
                                                         <?php } ?>
@@ -283,7 +282,7 @@
 </footer>
 
 <script type="text/javascript">
-    var main_url = "{{ URL::route('ajax.unpaidinvoices') }}";
+    var main_url = "{{ URL::route('ajax.getclients') }}";
 </script>
 
 @endsection

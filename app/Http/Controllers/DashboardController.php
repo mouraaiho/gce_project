@@ -7,10 +7,11 @@ use App\Invoice as Invoice;
 class DashboardController extends Controller
 {
     public function index(Request $request){
-      
       $currPage = 1;
-      $data = Invoice::getAllUnpaidInvoices($currPage);
-      return view("dashboard.home", ['data' => $data,'currPage' => $currPage]);
+      $data = array();
+      $data['invoices'] = Invoice::getAllUnpaidInvoices($currPage);
+      $data['currPage'] = $currPage;
+      return view("dashboard.home", ['data' => $data ]);
     }
 
 }
