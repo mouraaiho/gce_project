@@ -51,13 +51,13 @@
                             </a>
                         </li>
                         <li class="sidebar-item  {{ $current_menu == 'counter' ? 'active':'' }}">
-                            <a href="#" class='sidebar-link'>
+                            <a href="{{ URL::route('counter.index') }}" class='sidebar-link'>
                                 <i class="bi bi-archive-fill"></i>
                                 <span>عدادات الماء</span>
                             </a>
                         </li>
                         <li class="sidebar-item  {{ $current_menu == 'consumption' ? 'active':'' }}">
-                            <a href="#" class='sidebar-link'>
+                            <a href="{{ URL::route('consumption.index') }}" class='sidebar-link'>
                                 <i class="bi bi-bar-chart-line-fill"></i>
                                 <span>استهلاك الماء</span>
                             </a>
@@ -105,7 +105,6 @@
     <script src="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 
-    <script src="{{ asset('assets/vendors/apexcharts/apexcharts.js') }}"></script>
     <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
 
     <script src="{{ asset('assets/js/main.js') }}"></script>

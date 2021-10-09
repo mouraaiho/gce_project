@@ -16,8 +16,10 @@ class CreateCountersTable extends Migration
         Schema::create('counters', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('number');
+            $table->string('active');
             $table->string('itial_consumption');
             $table->string('start_date');
+            $table->string('end_date');
             $table->timestamps();
         });
     }
