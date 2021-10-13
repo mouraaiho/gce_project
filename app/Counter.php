@@ -23,6 +23,7 @@ class Counter extends Model
         $records =  DB::table('counters')->get();
         $data['totalPages'] = ceil(count($records) / $perPage);
         $data['result'] = DB::table('counters')
+        ->select('clients.id as clientId', 'counters.id as counterId', 'clients.name', 'clients.cin', 'counters.number', 'counters.itial_consumption', 'counters.start_date', 'counters.active', 'counters.end_date')
         ->join('clients', 'clients.id', '=', 'counters.client_id')
         ->offset($startAt)
         ->limit($perPage)->get();
@@ -30,6 +31,7 @@ class Counter extends Model
         $records =  DB::table('counters')->join('clients', 'clients.id', '=', 'counters.client_id')->orWhere('name', 'like' , '%'. $searchField .'%')->get();
         $data['totalPages'] = ceil(count($records) / $perPage);
         $data['result'] = DB::table('counters')
+        ->select('clients.id as clientId', 'counters.id as counterId', 'clients.name', 'clients.cin', 'counters.number', 'counters.itial_consumption', 'counters.start_date', 'counters.active', 'counters.end_date')
         ->join('clients', 'clients.id', '=', 'counters.client_id')
         ->orWhere('name' , 'like' , '%'. $searchField .'%')
         ->offset($startAt)

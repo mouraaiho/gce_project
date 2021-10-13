@@ -1,4 +1,11 @@
 
+function isNumeric(str) {
+    if (typeof str != "string") return false // we only process strings!  
+    return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+           !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
+}
+
+
 $(document).ready(function () {
     $('#dataupdate').on('click', '.pageNumber', function(event) { 
         event.preventDefault();
@@ -95,6 +102,50 @@ $(document).ready(function () {
                 console.error(xhr);
             }
         });
+    });
+
+    var currentConsumption = "";
+
+    $('#dataupdate').on('focus', '.thisMonthConsumptionInput',function(e){
+        currentConsumption = $(this).val();
+    });
+
+
+    $('#dataupdate').on('blur', '.thisMonthConsumptionInput',function(e){
+        console.log('Changed!');
+        var thisConsumption = $(this).val();
+        var counterId =  $(this).attr('data-value');
+        var lastConsumption = $("#last-consumption-" + counterId).text();
+        var year = $('#this-year').val();
+        var month = $('#this-month').val();
+        console.log("counter_id = "+ counterId + " : thisconsumption = "+ thisConsumption + " lastConsumption = "+ lastConsumption);
+
+        if(isNumeric(thisConsumption) && parseInt(thisConsumption) > parseInt(lastConsumption) || (isNumeric(thisConsumption) && lastConsumption =='')){
+            $.ajax({
+                type: "get",
+                url: update_url,
+                data: {
+                    counter_id : counterId,
+                    last_consumption : lastConsumption,
+                    this_consumption : thisConsumption,
+                    year : year,
+                    month : month,
+                },
+                success: function (data) {
+                    // $('#dataupdate').html("");
+                    // $('#dataupdate').html(data);
+                    // $("html, body").animate({ scrollTop: 0 }, "slow");
+                   console.log(data);
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr);
+                }
+            });
+        }else{
+            $(this).val(currentConsumption);
+        }
+
+        
     });
 
 });

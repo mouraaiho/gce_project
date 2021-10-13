@@ -14,8 +14,8 @@
             <td>{{ $d["number"] }}</td>
             <td>{{ $d['cin'] }}</td>
             <td>{{ $d['name'] }}</td>
-            <td>{{ $d['lastconsumption'] }}</td>
-            <td><input type="text" class="form-control thisMonthConsumptionInput" data-value="{{ $d['number'] }}" value="{{ $d['thisconsumption'] }}"></td>
+            <td><span id="last-consumption-{{ $d['counter_id'] }}">{{ $d['lastconsumption'] }}</span></td>
+            <td><input type="text" class="form-control thisMonthConsumptionInput" data-value="{{ $d['counter_id'] }}" value="{{ $d['thisconsumption'] }}"></td>
         </tr>
     @endforeach
     </tbody>

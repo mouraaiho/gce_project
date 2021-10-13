@@ -46,3 +46,4 @@ Route::get('/consumption','ConsumptionController@index')->name('consumption.inde
 Route::get('/consumption/edit','ConsumptionController@edit')->name('consumption.edit');
 Route::get('/consumption/delete','ConsumptionController@delete')->name('consumption.delete');
 Route::get('/consumption/getconsumptions', 'AjaxController@consumptions')->name("ajax.getconsumptions");
+Route::get('/consumption/updateconsumption', 'AjaxController@updateConsumption')->name("ajax.updateconsumption");

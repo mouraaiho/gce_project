@@ -75,6 +75,9 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-md-2">
+                                            <a href="#" id="search-btn" class="btn btn-warning" >طبع دليل الشهر الحالي</a>
+                                            </div>
                                         </div>
                                       <div class="table-responsive" id="dataupdate">
                                           <table class="table table-striped" id="table1">
@@ -93,8 +96,8 @@
                                                       <td>{{ $d["number"] }}</td>
                                                       <td>{{ $d['cin'] }}</td>
                                                       <td>{{ $d['name'] }}</td>
-                                                      <td>{{ $d['lastconsumption'] }}</td>
-                                                      <td><input type="text" class="form-control thisMonthConsumptionInput" data-value="{{ $d['number'] }}" value="{{ $d['thisconsumption'] }}"></td>
+                                                      <td><span id="last-consumption-{{ $d['counter_id'] }}">{{ $d['lastconsumption'] }}</span></td>
+                                                      <td><input type="text" class="form-control thisMonthConsumptionInput" data-value="{{ $d['counter_id'] }}" value="{{ $d['thisconsumption'] }}"></td>
                                                   </tr>
                                                 @endforeach
                                               </tbody>
@@ -133,6 +136,7 @@
 
 <script type="text/javascript">
     var main_url = "{{ URL::route('ajax.getconsumptions') }}";
+    var update_url = "{{ URL::route('ajax.updateconsumption') }}";
 </script>
 
 @endsection

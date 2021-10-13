@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Response;
 use App\Invoice as Invoice;
 use App\Client as Client;
 use App\Counter as Counter;
@@ -44,5 +45,28 @@ class AjaxController extends Controller
         $data['consumptions'] = Consumption::getAllConsumptions($currPage,15, $month, $year);
         $data['currPage'] = $currPage;
         return view("ajax.consumption_items", ['data' => $data ]);
+    }
+
+    public function updateConsumption(Request $request){
+        $counter_id = $request->input('counter_id');
+        $last_consumption   = $request->input('last_consumption');
+        $this_consumption   = $request->input('this_consumption');
+        $month   = $request->input('month');
+        $year   = $request->input('year');
+        $status = false;
+        $consumption = Consumption::getConsumptionByCounterMonthYear($counter_id , $month , $year);
+
+        if($consumption->isEmpty()){
+            $value = $this_consumption - $last_consumption;
+            $consumption_id = Consumption::AddConsumption($counter_id , $month , $year , $this_consumption);
+            Invoice::addInvoice($month , $year , $value , $consumption_id);
+            $status = true;
+        }else{
+            $value = $this_consumption - $last_consumption;
+            Consumption::updateConsumption($this_consumption , $consumption[0]->id);
+            Invoice::updateInvoice($month , $year , $value , $consumption[0]->id);
+            $status = true;
+        }
+        return Response::json(array('success' => $status, 'counter_id' => $counter_id), 200);
     }
 }

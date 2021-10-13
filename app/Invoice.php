@@ -29,4 +29,29 @@ class Invoice extends Model
         ->select('clients.cin', 'clients.name', 'clients.subscription_fees','counters.number as cnumber' , 'consumptions.month', 'consumptions.year', 'consumptions.value', 'invoices.id', 'invoices.number as inumber', 'invoices.price', 'invoices.status')->get();
         return $data;
       }
+
+
+      static function addInvoice($month, $year, $value, $consumption_id){
+        $price = -10;
+        $status = 0;
+        DB::table('invoices')->insert(
+            [
+              'number' => 'FC'.$consumption_id.''.$month.''.$year,
+              'consumption_id' => $consumption_id , 
+              'month_consumption' => $month , 
+              'year_consumption' => $year , 
+              'value_consumption' => $value,
+              'price' => $price,
+              'status' => $status
+            ]
+        );
+      }
+
+      static function updateInvoice($month, $year, $value, $consumption_id){
+        DB::table('invoices')
+        ->Where([['consumption_id','=', $consumption_id], ['month_consumption','=', $month], ['year_consumption','=', $year]])
+        ->update(
+            ['value_consumption' => $value]
+        );
+      }
 }
