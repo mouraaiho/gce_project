@@ -7,6 +7,7 @@ function isNumeric(str) {
 
 
 $(document).ready(function () {
+
     $('#dataupdate').on('click', '.pageNumber', function(event) { 
         event.preventDefault();
         var pageNumber = $(this).attr("value");
@@ -144,8 +145,39 @@ $(document).ready(function () {
         }else{
             $(this).val(currentConsumption);
         }
-
-        
     });
 
+
+    $('#invoice-search-btn').on('click', function(event) { 
+        console.log('Clicked!');
+        var pageNumber = 1;
+        var year = $('#this-year').val();
+        var month = $('#this-month').val();
+        var type_invoice = $('#type-invoice').val();
+        var client_name = $('#client-name').val();
+        var counter_name = $('#counter-number').val();
+        var invoice_number = $('#invoice-number').val();
+        $.ajax({
+            type: "get",
+            url: main_url,
+            data: {
+                pageN : pageNumber,
+                month : month,
+                year  : year,
+                typeInvoice : type_invoice,
+                clientNumber : client_name,
+                counterName : counter_name,
+                invoiceNumber : invoice_number,
+            },
+            success: function (data) {
+                $('#dataupdate').html("");
+                $('#dataupdate').html(data);
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                //console.log(data);
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr);
+            }
+        });
+    });
 });

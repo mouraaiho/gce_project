@@ -63,7 +63,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item {{ $current_menu == 'invoice' ? 'active':'' }} ">
-                            <a href="#" class='sidebar-link'>
+                            <a href="{{ URL::route('invoice.index') }}" class='sidebar-link'>
                                 <i class="bi bi-calculator-fill"></i>
                                 <span>الفواتير</span>
                             </a>

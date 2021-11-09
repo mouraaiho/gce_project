@@ -37,7 +37,6 @@ class Counter extends Model
         ->offset($startAt)
         ->limit($perPage)->get();
       }
-     
       return $data;
     }
 }
