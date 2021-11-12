@@ -69,14 +69,14 @@
                             </a>
                         </li>
                         <li class="sidebar-item {{ $current_menu == 'payment' ? 'active':'' }} ">
-                            <a href="#" class='sidebar-link'>
+                            <a href="{{ URL::route('payment.index') }}" class='sidebar-link'>
                                 <i class="bi bi-credit-card-fill"></i>
                                 <span>الأداءات </span>
                             </a>
                         </li>
                         <li class="sidebar-title">إعدادات البرنامج</li>
                         <li class="sidebar-item {{ $current_menu == 'config' ? 'active':'' }} ">
-                            <a href="#" class='sidebar-link'>
+                            <a href="{{ URL::route('config.index') }}" class='sidebar-link'>
                                 <i class="bi bi-gear-fill"></i>
                                 <span>الإعدادات</span>
                             </a>

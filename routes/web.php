@@ -57,3 +57,19 @@ Route::get('/invoice/edit','InvoiceController@edit')->name('invoice.edit');
 Route::get('/invoice/delete','InvoiceController@delete')->name('invoice.delete');
 Route::get('/invoice/getinvoices', 'AjaxController@invoices')->name("ajax.getinvoices");
 Route::get('/invoice/updateinvoice', 'AjaxController@updateInvoice')->name("ajax.updateinvoice");
+/**
+ * 
+ * Payment routes
+ * 
+ * **/
+Route::get('/payment','PaymentController@index')->name('payment.index');
+Route::get('/payment/edit','PaymentController@edit')->name('payment.edit');
+Route::get('/payment/delete','PaymentController@delete')->name('payment.delete');
+Route::get('/payment/getpayments', 'AjaxController@payments')->name("ajax.getpayments");
+Route::get('/payment/updatepayment', 'AjaxController@updatePayment')->name("ajax.updatepayment");
+/**
+ * 
+ * Config routes
+ * 
+ * **/
+Route::get('/config','ConfigController@index')->name('config.index');
