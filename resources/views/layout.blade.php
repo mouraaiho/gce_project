@@ -82,7 +82,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item  {{ $current_menu == 'user' ? 'active':'' }}">
-                            <a href="#" class='sidebar-link'>
+                            <a href="{{ URL::route('user.index') }}" class='sidebar-link'>
                                 <i class="bi bi-person-lines-fill"></i>
                                 <span>المستخدمين</span>
                             </a>

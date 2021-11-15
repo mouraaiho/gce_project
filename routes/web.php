@@ -21,11 +21,23 @@ Route::get('/dashboard','DashboardController@index')->name('dashboard.index');
 Route::get('/dashboard/getunpaidinvoices', 'AjaxController@UnpaidInvoices')->name("ajax.unpaidinvoices");
 /**
  * 
+ * User routes
+ * 
+ * **/
+Route::get('/user','UserController@index')->name('user.index');
+Route::get('/user/edit', 'UserController@edit')->name("user.edit");
+Route::get('/user/delete', 'UserController@delete')->name("user.delete");
+Route::get('/user/getusers', 'AjaxController@users')->name("ajax.getusers");
+/**
+ * 
  * Client routes
  * 
  * **/
 Route::get('/client','ClientController@index')->name('client.index');
+Route::get('/client/add','ClientController@add')->name('client.add');
+Route::post('/client/save','ClientController@save')->name('client.save');
 Route::get('/client/edit','ClientController@edit')->name('client.edit');
+Route::post('/client/update','ClientController@update')->name('client.update');
 Route::get('/client/delete','ClientController@delete')->name('client.delete');
 Route::get('/client/getclients', 'AjaxController@clients')->name("ajax.getclients");
 /**
@@ -73,3 +85,6 @@ Route::get('/payment/updatepayment', 'AjaxController@updatePayment')->name("ajax
  * 
  * **/
 Route::get('/config','ConfigController@index')->name('config.index');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

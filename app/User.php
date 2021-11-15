@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use Illuminate\Support\Facades\DB;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -36,4 +36,25 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    static function getAllUsers($page = 1, $perPage = 15, $searchField = ''){
+        $startAt = $perPage * ($page - 1);
+        if($searchField == ''){
+          $records =  DB::table('users')->get();
+          $data['totalPages'] = ceil(count($records) / $perPage);
+          $data['result'] = DB::table('users')
+          ->offset($startAt)
+          ->limit($perPage)->get();
+        }else{
+          $records =  DB::table('users')->orWhere('name', 'like' , '%'. $searchField .'%')->get();
+          $data['totalPages'] = ceil(count($records) / $perPage);
+          $data['result'] = DB::table('users')
+          ->orWhere('name' , 'like' , '%'. $searchField .'%')
+          ->offset($startAt)
+          ->limit($perPage)->get();
+        }
+       
+        return $data;
+      }
 }

@@ -9,6 +9,8 @@ class Client extends Model
     protected $table = "clients";
     protected $primaryKey = "id";
 
+    protected $fillable = ['name'];
+
     public function counters(){
       return $this->hasMany(Counter::class);
     }
