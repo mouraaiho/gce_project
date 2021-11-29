@@ -23,8 +23,19 @@
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
+                                        @if($data['status'] =='success')
+                                        <div class="alert alert-success">
+                                            <h4 class="alert-heading">تمت العملية بنجاح</h4>
+                                            <p>{{ $data['message'] }}</p>
+                                        </div>
+                                        @elseif($data['status'] =='error')
+                                        <div class="alert alert-danger">
+                                            <h4 class="alert-heading">هناك عطب ما</h4>
+                                            <p>{{ $data['message'] }}</p>
+                                        </div>
+                                        @endif
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-9">
                                                 <div class="form-group row align-items-center">
                                                     <div class="col-lg-2 col-3">
                                                         <label class="col-form-label">اسم المشرك</label>
@@ -33,6 +44,9 @@
                                                         <input type="text" id="search-field" class="form-control" name="fname" placeholder="اسم المشرك  للبحث">
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <a href="{{ route('client.add')}}" class="btn btn-info">إضافة مشترك جديد</a>
                                             </div>
                                         </div>
                                       <div class="table-responsive" id="dataupdate">
@@ -58,8 +72,8 @@
                                                       <td>{{ $d->subscription_fees }}</td>
                                                       <td>{{ $d->subscription_date }}</td>
                                                       <td>
-                                                          <a href="{{ URL::route('client.edit') }}" class="btn btn-success">تحين</a>
-                                                          <a href="{{ URL::route('client.delete') }}" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger">حذف</a>
+                                                          <a href="{{ URL::route('client.edit',['id' => $d->id])  }}" class="btn btn-success">تحين</a>
+                                                          <a href="{{ URL::route('client.delete',['id' => $d->id]) }}" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger">حذف</a>
                                                       </td>
                                                   </tr>
                                                 @endforeach

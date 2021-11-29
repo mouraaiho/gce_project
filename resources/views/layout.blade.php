@@ -20,6 +20,7 @@
         <link rel="stylesheet" href="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/app.rtl.css') }}">
+          @stack('styles')
     </head>
     <body>
     <div id="app">
@@ -110,5 +111,6 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
+    @stack('scripts')
 </body>
 </html>

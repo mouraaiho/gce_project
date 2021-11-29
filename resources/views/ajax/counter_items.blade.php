@@ -19,11 +19,11 @@
             <td>{{ $d->name }}</td>
             <td>{{ $d->itial_consumption }}</td>
             <td>{{ $d->start_date }}</td>
-            <td>{{ ($d->active == 1)? 'يعمل':'لا يعمل'}}</td>
+            <td>{!! ($d->active == 0)? '<span class="badge bg-danger">لا يعمل</span>':'<span class="badge bg-primary">يعمل</span>'  !!}</td>
             <td>{{ ($d->end_date == '0000-00-00 00:00:00') ? '': $d->end_date }}</td>
             <td>
-                <a href="{{ URL::route('counter.edit') }}" class="btn btn-success">تحين</a>
-                <a href="{{ URL::route('counter.delete') }}" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger">حذف</a>
+                <a href="{{ URL::route('counter.edit',['id' => $d->id ]) }}" class="btn btn-success">تحين</a>
+                <a href="{{ URL::route('counter.delete',['id' => $d->id ]) }}" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger">حذف</a>
             </td>
         </tr>
     @endforeach

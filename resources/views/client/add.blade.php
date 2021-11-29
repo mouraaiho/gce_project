@@ -19,10 +19,21 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">لائحة المشتركين</h4>
+                                    <h4 class="card-title">اضافة مشترك جديد </h4>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
+                                        @if($status =='success')
+                                        <div class="alert alert-success">
+                                            <h4 class="alert-heading">تمت العملية بنجاح</h4>
+                                            <p>{{ $message }}</p>
+                                        </div>
+                                        @elseif($status =='error')
+                                        <div class="alert alert-danger">
+                                            <h4 class="alert-heading">هناك عطب ما</h4>
+                                            <p>{{ $message }}</p>
+                                        </div>
+                                        @endif
                                         <form action="{{ route('client.save')}}" method="post">
                                         @csrf
                                             <div class="row">
@@ -92,7 +103,7 @@
                                                             <label class="col-form-label">تاريخ الاشتراك</label>
                                                         </div>
                                                         <div class="col-lg-9 col-9">
-                                                            <input type="text"  class="form-control" name="subscription_date" placeholder="تاريخ الاشتراك">
+                                                            <input type="date"  class="form-control" name="subscription_date" placeholder="تاريخ الاشتراك">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -101,7 +112,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group row align-items-center">
                                                         <div class="col-lg-3 col-3">
-                                                            
+
                                                         </div>
                                                         <div class="col-lg-9 col-9">
                                                             <input type="submit" class="btn btn-primary" name="submit" />

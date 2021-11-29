@@ -20,8 +20,8 @@
             <td>{{ $d->subscription_fees }}</td>
             <td>{{ $d->subscription_date }}</td>
             <td>
-                <a href="{{ URL::route('client.edit') }}" class="btn btn-success">تحين</a>
-                <a href="{{ URL::route('client.delete') }}" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger">حذف</a>
+                <a href="{{ URL::route('client.edit',['id' => $d->id])  }}" class="btn btn-success">تحين</a>
+                <a href="{{ URL::route('client.delete',['id' => $d->id]) }}" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger">حذف</a>
             </td>
         </tr>
     @endforeach
