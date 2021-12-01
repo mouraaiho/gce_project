@@ -1,6 +1,6 @@
 
 function isNumeric(str) {
-    if (typeof str != "string") return false // we only process strings!  
+    if (typeof str != "string") return false // we only process strings!
     return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
            !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
 }
@@ -8,7 +8,7 @@ function isNumeric(str) {
 
 $(document).ready(function () {
 
-    $('#dataupdate').on('click', '.pageNumber', function(event) { 
+    $('#dataupdate').on('click', '.pageNumber', function(event) {
         event.preventDefault();
         var pageNumber = $(this).attr("value");
         var search = $('#search-field').val();
@@ -55,7 +55,7 @@ $(document).ready(function () {
         });
     });
 
-    $('#dataupdate').on('click', '.pageNumber2', function(event) { 
+    $('#dataupdate').on('click', '.pageNumber2', function(event) {
         event.preventDefault();
         var pageNumber = $(this).attr("value");
         var year = $('#this-year').val();
@@ -80,7 +80,7 @@ $(document).ready(function () {
         });
     });
 
-    $('#search-btn').on('click', function(event) { 
+    $('#search-btn').on('click', function(event) {
         console.log('Clicked!');
         var pageNumber = 1;
         var year = $('#this-year').val();
@@ -148,7 +148,7 @@ $(document).ready(function () {
     });
 
 
-    $('#invoice-search-btn').on('click', function(event) { 
+    $('#invoice-search-btn').on('click', function(event) {
         console.log('Clicked!');
         var pageNumber = 1;
         var year = $('#this-year').val();
@@ -180,4 +180,33 @@ $(document).ready(function () {
             }
         });
     });
+
+
+    $('#table-head').on('blur', '.config-value',function(e){
+        console.log('Changed!');
+        var value = $(this).val();
+        var name =  $(this).attr('name');
+
+        console.log("value = "+ value + " : name = "+ name);
+          $.ajax({
+              type: "GET",
+              url: main_url,
+              data: {
+                  name : name,
+                  value : value,
+              },
+              success: function (data) {
+                  // $('#dataupdate').html("");
+                  // $('#dataupdate').html(data);
+                  // $("html, body").animate({ scrollTop: 0 }, "slow");
+                 console.log(data);
+                 location.reload();
+              },
+              error: function (xhr, status, error) {
+                  console.error(xhr);
+              }
+          });
+    });
+
+
 });

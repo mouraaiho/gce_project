@@ -8,6 +8,7 @@ use App\Invoice as Invoice;
 use App\Client as Client;
 use App\Counter as Counter;
 use App\Consumption as Consumption;
+use App\Config as Config;
 class AjaxController extends Controller
 {
     //
@@ -68,5 +69,14 @@ class AjaxController extends Controller
             $status = true;
         }
         return Response::json(array('success' => $status, 'counter_id' => $counter_id), 200);
+    }
+
+
+    public function updateConfig(Request $request){
+      $name   = $request->input('name');
+      $value  = $request->input('value');
+      Config::updateConfig($name, $value);
+      $status = true;
+      return Response::json(array('success' => $status), 200);
     }
 }

@@ -31,7 +31,6 @@ class Client extends Model
         ->offset($startAt)
         ->limit($perPage)->get();
       }
-     
       return $data;
     }
 

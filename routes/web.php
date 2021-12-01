@@ -88,6 +88,7 @@ Route::get('/payment/updatepayment', 'AjaxController@updatePayment')->name("ajax
  *
  * **/
 Route::get('/config','ConfigController@index')->name('config.index');
+Route::get('/config/updateconfig', 'AjaxController@updateConfig')->name("ajax.updateconfig");
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
