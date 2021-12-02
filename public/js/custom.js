@@ -153,9 +153,10 @@ $(document).ready(function () {
         var pageNumber = 1;
         var year = $('#this-year').val();
         var month = $('#this-month').val();
-        var type_invoice = $('#type-invoice').val();
+        var type_invoice = $('#type-invoice').find(":selected").val();
+        console.log(type_invoice);
         var client_name = $('#client-name').val();
-        var counter_name = $('#counter-number').val();
+        var counter_number = $('#counter-number').val();
         var invoice_number = $('#invoice-number').val();
         $.ajax({
             type: "get",
@@ -165,8 +166,8 @@ $(document).ready(function () {
                 month : month,
                 year  : year,
                 typeInvoice : type_invoice,
-                clientNumber : client_name,
-                counterName : counter_name,
+                clientName : client_name,
+                counterNumber: counter_number,
                 invoiceNumber : invoice_number,
             },
             success: function (data) {
@@ -180,6 +181,43 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('#dataupdate').on('click', '.pageNumber', function(event) {
+        event.preventDefault();
+        var pageNumber = $(this).attr("value");
+        console.log('Clicked!');
+        var year = $('#this-year').val();
+        var month = $('#this-month').val();
+        var type_invoice = $('#type-invoice').find(":selected").val();
+        console.log(type_invoice);
+        var client_name = $('#client-name').val();
+        var counter_number = $('#counter-number').val();
+        var invoice_number = $('#invoice-number').val();
+        $.ajax({
+            type: "get",
+            url: main_url,
+            data: {
+                pageN : pageNumber,
+                month : month,
+                year  : year,
+                typeInvoice : type_invoice,
+                clientName : client_name,
+                counterNumber: counter_number,
+                invoiceNumber : invoice_number,
+            },
+            success: function (data) {
+                $('#dataupdate').html("");
+                $('#dataupdate').html(data);
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                //console.log(data);
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr);
+            }
+        });
+    });
+
+
 
 
     $('#table-head').on('blur', '.config-value',function(e){
@@ -207,6 +245,8 @@ $(document).ready(function () {
               }
           });
     });
+
+
 
 
 });

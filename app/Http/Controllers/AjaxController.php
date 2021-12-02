@@ -72,6 +72,21 @@ class AjaxController extends Controller
     }
 
 
+    public function invoices(Request $request){
+      $counter_number = $request->input('counterNumber');
+      $client_name = $request->input('clientName');
+      $invoice_number = $request->input('invoiceNumber');
+      $type_invoice = $request->input('typeInvoice');
+      $month   = $request->input('month');
+      $year   = $request->input('year');
+      $currPage   = $request->input('pageN');
+      $status = true;
+      $data['invoices'] = Invoice::getInvoicesBy($currPage, $year,$month, $client_name , $counter_number , $invoice_number, $type_invoice);
+      $data['currPage'] = $currPage;
+      return view("ajax.unpaid_invoice_items", ['data' => $data ]);
+    }
+
+
     public function updateConfig(Request $request){
       $name   = $request->input('name');
       $value  = $request->input('value');

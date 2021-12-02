@@ -30,7 +30,7 @@
                                                         <label class="col-form-label">تاريخ البداية</label>
                                                     </div>
                                                     <div class="col-lg-5 col-5">
-                                                        <input type="date" name="" class="form-control">
+                                                        <input type="date" id="date_start" name="" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -40,7 +40,7 @@
                                                         <label class="col-form-label">تاريخ النهاية</label>
                                                     </div>
                                                     <div class="col-lg-5 col-5">
-                                                        <input type="date" name="" class="form-control">
+                                                        <input type="date" id="date_end" name="" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -146,7 +146,7 @@
 </footer>
 
 <script type="text/javascript">
-    var main_url = "{{ URL::route('ajax.getinvoices') }}";
+    var main_url = "{{ URL::route('ajax.getpayments') }}";
 </script>
 
 @endsection
