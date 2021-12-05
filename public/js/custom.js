@@ -217,6 +217,62 @@ $(document).ready(function () {
         });
     });
 
+    $('#payment-search-btn').on('click', function(event) {
+        console.log('Clicked!');
+        var pageNumber = 1;
+        var date_start = $('#date-start').val();
+        var date_end = $('#date-end').val();
+        var client_name = $('#client-name').val();
+        var counter_number = $('#counter-number').val();
+        var invoice_number = $('#invoice-number').val();
+        $.ajax({
+            type: "get",
+            url: main_url,
+            data: {
+                pageN : pageNumber,
+                dateStart : date_start,
+                dateEnd  : date_end,
+                clientName : client_name,
+                counterNumber: counter_number,
+                invoiceNumber : invoice_number,
+            },
+            success: function (data) {
+                $('#dataupdate').html("");
+                $('#dataupdate').html(data);
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                //console.log(data);
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr);
+            }
+        });
+    });
+
+    $(".selectID").change(function() {
+      var checkboxVal = false
+        if(this.checked) {
+            checkboxVal = true
+        }
+        var invoice_id = $(this).val();
+        console.log(checkboxVal);
+        $.ajax({
+            type: "get",
+            url: selected_url,
+            data: {
+                invoice_id : invoice_id,
+                checkboxVal : checkboxVal,
+            },
+            success: function (data) {
+                // $('#dataupdate').html("");
+                // $('#dataupdate').html(data);
+                // $("html, body").animate({ scrollTop: 0 }, "slow");
+                console.log(data);
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr);
+            }
+        });
+    });
 
 
 

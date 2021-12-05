@@ -10,6 +10,7 @@
             <th>الاستهلاك الشهري</th>
             <th>ثمن الفاتورة</th>
             <th>اداء الفاتورة</th>
+            <th>اختيارات</th>
         </tr>
     </thead>
     <tbody>
@@ -24,6 +25,7 @@
             <td>{{ $d->value }}</td>
             <td>{{ $d->price }}</td>
             <td>{{ ($d->status) ? 'مؤذات' : 'غير مؤذات' }}</td>
+            <td>{!! ($d->status) ? '' : '<input type="checkbox" class="selectID" value="'. $d->inumber.'" />' !!}</td>
         </tr>
     @endforeach
     </tbody>

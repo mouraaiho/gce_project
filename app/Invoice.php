@@ -17,7 +17,8 @@ class Invoice extends Model
           $records =  DB::table('clients')
                         ->join('counters', 'clients.id', '=', 'counters.client_id')
                         ->join('consumptions', 'counters.id', '=', 'consumptions.counter_id')
-                        ->join('invoices', 'consumptions.id', '=', 'invoices.consumption_id')->get();
+                        ->join('invoices', 'consumptions.id', '=', 'invoices.consumption_id')
+                        ->orderByRaw('CAST(counters.number AS int)', 'asc')->get();
 
                         $data['totalPages'] = ceil(count($records) / $perPage);
 
@@ -27,13 +28,15 @@ class Invoice extends Model
                         ->join('invoices', 'consumptions.id', '=', 'invoices.consumption_id')
                         ->offset($startAt)
                         ->limit($perPage)
-                        ->select('clients.cin', 'clients.name', 'clients.subscription_fees','counters.number as cnumber' , 'consumptions.month', 'consumptions.year', 'consumptions.value', 'invoices.id', 'invoices.number as inumber', 'invoices.price', 'invoices.status')->get();
+                        ->select('clients.cin', 'clients.name', 'clients.subscription_fees','counters.number as cnumber' , 'consumptions.month', 'consumptions.year', 'consumptions.value', 'invoices.id', 'invoices.number as inumber', 'invoices.price', 'invoices.status')
+                        ->orderByRaw('CAST(counters.number AS int)', 'asc')->get();
 
         }else{
           $records =  DB::table('clients')
                         ->join('counters', 'clients.id', '=', 'counters.client_id')
                         ->join('consumptions', 'counters.id', '=', 'consumptions.counter_id')
-                        ->join('invoices', 'consumptions.id', '=', 'invoices.consumption_id')->get();
+                        ->join('invoices', 'consumptions.id', '=', 'invoices.consumption_id')
+                        ->orderByRaw('CAST(counters.number AS int)', 'asc')->get();
 
                         $data['totalPages'] = ceil(count($records) / $perPage);
 
@@ -46,7 +49,8 @@ class Invoice extends Model
                         ->orWhere('clients.name' , 'like' , '%'. $searchField .'%')
                         ->orWhere('counters.number' , 'like' , '%'. $searchField .'%')
                         ->orWhere('invoices.number' , 'like' , '%'. $searchField .'%')
-                        ->select('clients.cin', 'clients.name', 'clients.subscription_fees','counters.number as cnumber' , 'consumptions.month', 'consumptions.year', 'consumptions.value', 'invoices.id', 'invoices.number as inumber', 'invoices.price', 'invoices.status')->get();
+                        ->select('clients.cin', 'clients.name', 'clients.subscription_fees','counters.number as cnumber' , 'consumptions.month', 'consumptions.year', 'consumptions.value', 'invoices.id', 'invoices.number as inumber', 'invoices.price', 'invoices.status')
+                        ->orderByRaw('CAST(counters.number AS int)', 'asc')->get();
 
         }
         return $data;
@@ -58,7 +62,8 @@ class Invoice extends Model
         $records =  DB::table('clients')
         ->join('counters', 'clients.id', '=', 'counters.client_id')
         ->join('consumptions', 'counters.id', '=', 'consumptions.counter_id')
-        ->join('invoices', 'consumptions.id', '=', 'invoices.consumption_id')->get();
+        ->join('invoices', 'consumptions.id', '=', 'invoices.consumption_id')
+        ->orderByRaw('CAST(counters.number AS int)', 'asc')->get();
 
         $data['totalPages'] = ceil(count($records) / $perPage);
 
@@ -68,7 +73,8 @@ class Invoice extends Model
         ->join('invoices', 'consumptions.id', '=', 'invoices.consumption_id')
         ->offset($startAt)
         ->limit($perPage)
-        ->select('clients.cin', 'clients.name', 'clients.subscription_fees','counters.number as cnumber' , 'consumptions.month', 'consumptions.year', 'consumptions.value', 'invoices.id', 'invoices.number as inumber', 'invoices.price', 'invoices.status')->get();
+        ->select('clients.cin', 'clients.name', 'clients.subscription_fees','counters.number as cnumber' , 'consumptions.month', 'consumptions.year', 'consumptions.value', 'invoices.id', 'invoices.number as inumber', 'invoices.price', 'invoices.status')
+        ->orderByRaw('CAST(counters.number AS int)', 'asc')->get();
 
         return $data;
       }
@@ -102,11 +108,16 @@ class Invoice extends Model
         $perPage = 15;
         $startAt = $perPage * ($page - 1);
         $orWhere = [];
-        $where = [
-            ['invoices.month_consumption', "=", $month ],
-            ['invoices.year_consumption', "=", $year ],
-            ["invoices.status", "=", $type_invoice  ],
-          ];
+        $where = [];
+        if($month != ''){
+          $where[] = ['invoices.month_consumption', "=", $month ];
+        }
+        if($year != ''){
+          $where[] = ['invoices.year_consumption', "=", $year ];
+        }
+        if($type_invoice != ''){
+          $where[] = ["invoices.status", "=", $type_invoice ];
+        }
         if($client_name != ''){
           $where[] = ["clients.name","like", "%{$client_name}%" ];
         }
@@ -120,7 +131,8 @@ class Invoice extends Model
                       ->join('counters', 'clients.id', '=', 'counters.client_id')
                       ->join('consumptions', 'counters.id', '=', 'consumptions.counter_id')
                       ->where($where)
-                      ->join('invoices', 'consumptions.id', '=', 'invoices.consumption_id')->get();
+                      ->join('invoices', 'consumptions.id', '=', 'invoices.consumption_id')
+                      ->orderByRaw('CAST(counters.number AS int)', 'asc')->get();
         $data['totalPages'] = ceil(count($records) / $perPage);
         $data['result'] = DB::table('clients')
                       ->join('counters', 'clients.id', '=', 'counters.client_id')
@@ -129,7 +141,8 @@ class Invoice extends Model
                       ->where($where)
                       ->offset($startAt)
                       ->limit($perPage)
-                      ->select('clients.cin', 'clients.name', 'clients.subscription_fees','counters.number as cnumber' , 'consumptions.month', 'consumptions.year', 'consumptions.value', 'invoices.id', 'invoices.number as inumber', 'invoices.price', 'invoices.status')->get();
+                      ->select('clients.cin', 'clients.name', 'clients.subscription_fees','counters.number as cnumber' , 'consumptions.month', 'consumptions.year', 'consumptions.value', 'invoices.id', 'invoices.number as inumber', 'invoices.price', 'invoices.status')
+                      ->orderByRaw('CAST(counters.number AS int)', 'asc')->get();
 
         return $data;
       }

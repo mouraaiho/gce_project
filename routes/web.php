@@ -71,6 +71,7 @@ Route::get('/invoice','InvoiceController@index')->name('invoice.index');
 Route::get('/invoice/edit','InvoiceController@edit')->name('invoice.edit');
 Route::get('/invoice/delete','InvoiceController@delete')->name('invoice.delete');
 Route::get('/invoice/getinvoices', 'AjaxController@invoices')->name("ajax.getinvoices");
+Route::get('/invoice/selectedinvoice', 'AjaxController@selectedInvoice')->name("ajax.selectedinvoice");
 Route::get('/invoice/updateinvoice', 'AjaxController@updateInvoice')->name("ajax.updateinvoice");
 /**
  *

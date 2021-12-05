@@ -31,6 +31,7 @@
                                                     </div>
                                                     <div class="col-lg-3 col-3">
                                                         <select id="this-year" class="form-control">
+                                                            <option value=""></option>
                                                             <option value="2020">2020</option>
                                                             <option value="2021">2021</option>
                                                             <option value="2022">2022</option>
@@ -56,6 +57,7 @@
                                                     </div>
                                                     <div class="col-lg-2 col-2">
                                                         <select id="this-month" class="form-control">
+                                                            <option value=""></option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
                                                             <option value="3">3</option>
@@ -86,7 +88,10 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
-                                            <a href="#" id="print-invoices-btn" class="btn btn-info" >طبع فواتير الشهر الحالي</a>
+                                              <a href="#" id="print-invoices-btn" class="btn btn-info" >طبع فواتير الشهر الحالي</a>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <a href="#" id="add-invoice-btn" class="btn btn-primary" >اداء فواتير</a>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -122,6 +127,7 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <a href="#" id="invoice-search-btn" class="btn btn-success" >البحث</a>
+                                                <a href="#" id="unselect-inoice-btn" class="btn btn-danger" >إلغاء الاختيارات</a>
                                             </div>
                                         </div>
                                       <div class="table-responsive" id="dataupdate">
@@ -152,7 +158,7 @@
                                                       <td>{{ $d->value }}</td>
                                                       <td>{{ $d->price }}</td>
                                                       <td>{{ ($d->status) ? 'مؤذات' : 'غير مؤذات' }}</td>
-                                                      <td></td>
+                                                      <td>{!! ($d->status) ? '' : '<input type="checkbox" class="selectID" value="'. $d->inumber.'" />' !!}</td>
                                                   </tr>
                                                 @endforeach
                                               </tbody>
@@ -191,6 +197,7 @@
 
 <script type="text/javascript">
     var main_url = "{{ URL::route('ajax.getinvoices') }}";
+    var selected_url = "{{ URL::route('ajax.selectedinvoice') }}";
 </script>
 
 @endsection

@@ -30,7 +30,7 @@
                                                         <label class="col-form-label">تاريخ البداية</label>
                                                     </div>
                                                     <div class="col-lg-5 col-5">
-                                                        <input type="date" id="date_start" name="" class="form-control">
+                                                        <input type="date" id="date-start" name="" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -40,7 +40,7 @@
                                                         <label class="col-form-label">تاريخ النهاية</label>
                                                     </div>
                                                     <div class="col-lg-5 col-5">
-                                                        <input type="date" id="date_end" name="" class="form-control">
+                                                        <input type="date" id="date-end" name="" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -77,7 +77,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
-                                                <a href="#" id="invoice-search-btn" class="btn btn-success" >البحث</a>
+                                                <a href="#" id="payment-search-btn" class="btn btn-success" >البحث</a>
                                             </div>
                                         </div>
                                       <div class="table-responsive" id="dataupdate">

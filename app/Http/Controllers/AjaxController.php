@@ -83,7 +83,7 @@ class AjaxController extends Controller
       $status = true;
       $data['invoices'] = Invoice::getInvoicesBy($currPage, $year,$month, $client_name , $counter_number , $invoice_number, $type_invoice);
       $data['currPage'] = $currPage;
-      return view("ajax.unpaid_invoice_items", ['data' => $data ]);
+      return view("ajax.invoice_items", ['data' => $data ]);
     }
 
 
@@ -93,5 +93,21 @@ class AjaxController extends Controller
       Config::updateConfig($name, $value);
       $status = true;
       return Response::json(array('success' => $status), 200);
+    }
+
+    public function selectedInvoice(Request $request){
+      $checkboxVal   = $request->input('checkboxVal');
+      $invoice_id    = $request->input('invoice_id');
+      $request->session()->get('invoiceList', array());
+      if($checkboxVal){
+        $invoiceList = array();
+        array_push($invoiceList, $invoice_id);
+        $request->session()->push('invoiceList', $invoiceList);
+      }else{
+        $invoiceList = $request->session()->get('invoiceList');
+        $invoiceList = \array_diff($invoiceList, $invoice_id);
+      }
+      $invoiceList = $request->session()->get('invoiceList');
+      return Response::json(array('invoiceList' => $invoiceList), 200);
     }
 }
