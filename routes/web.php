@@ -68,10 +68,13 @@ Route::get('/consumption/updateconsumption', 'AjaxController@updateConsumption')
  *
  * **/
 Route::get('/invoice','InvoiceController@index')->name('invoice.index');
-Route::get('/invoice/edit','InvoiceController@edit')->name('invoice.edit');
+Route::get('/invoice/add','InvoiceController@add')->name('invoice.add');
+Route::get('/invoice/save','InvoiceController@save')->name('invoice.save');
 Route::get('/invoice/delete','InvoiceController@delete')->name('invoice.delete');
 Route::get('/invoice/getinvoices', 'AjaxController@invoices')->name("ajax.getinvoices");
 Route::get('/invoice/selectedinvoice', 'AjaxController@selectedInvoice')->name("ajax.selectedinvoice");
+Route::get('/invoice/emptyselectedinvoice', 'AjaxController@emptySelectedInvoice')->name("ajax.emptyselectedinvoice");
+Route::get('/invoice/addselectedinvoice', 'AjaxController@addSelectedInvoice')->name("ajax.addselectedinvoice");
 Route::get('/invoice/updateinvoice', 'AjaxController@updateInvoice')->name("ajax.updateinvoice");
 /**
  *

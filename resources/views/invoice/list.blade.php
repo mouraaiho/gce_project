@@ -81,6 +81,7 @@
                                                     </div>
                                                     <div class="col-lg-9 col-9">
                                                         <select id="type-invoice" class="form-control">
+                                                            <option value=""></option>
                                                             <option value="1">مؤذات</option>
                                                             <option value="0">غير مؤذات</option>
                                                         </select>
@@ -127,7 +128,7 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <a href="#" id="invoice-search-btn" class="btn btn-success" >البحث</a>
-                                                <a href="#" id="unselect-inoice-btn" class="btn btn-danger" >إلغاء الاختيارات</a>
+                                                <a href="#" id="empty-invoice-btn" class="btn btn-danger" >إلغاء الاختيارات</a>
                                             </div>
                                         </div>
                                       <div class="table-responsive" id="dataupdate">
@@ -158,7 +159,13 @@
                                                       <td>{{ $d->value }}</td>
                                                       <td>{{ $d->price }}</td>
                                                       <td>{{ ($d->status) ? 'مؤذات' : 'غير مؤذات' }}</td>
-                                                      <td>{!! ($d->status) ? '' : '<input type="checkbox" class="selectID" value="'. $d->inumber.'" />' !!}</td>
+                                                      <td>
+                                                        @if($d->status)
+                                                          {{ "" }}
+                                                        @else
+                                                        <input type="checkbox" class="selectID" {{ (strpos($invoiceList,strval($d->id)) !== false) ? "checked":""  }} value="{{ $d->id }}" />
+                                                        @endif
+                                                      </td>
                                                   </tr>
                                                 @endforeach
                                               </tbody>
@@ -167,7 +174,7 @@
                                                 <ul class="pagination pagination-primary">
                                                     <?php for($i = 1 ; $i <= $data['invoices']['totalPages']; $i++){ ?>
                                                         <?php if ($i >= $data['currPage'] -2 && $i <= $data['currPage'] +2){ ?>
-                                                            <li class="page-item {{ ( $i == $data['currPage']) ? 'active':'' }}"><a class="page-link pageNumber" value="{{ $i }}" href="">{{ $i }}</a></li>
+                                                            <li class="page-item {{ ( $i == $data['currPage']) ? 'active':'' }}"><a class="page-link pageInvoiceNumber" value="{{ $i }}" href="#">{{ $i }}</a></li>
                                                         <?php } ?>
                                                     <?php } ?>
                                                 </ul>
@@ -198,6 +205,9 @@
 <script type="text/javascript">
     var main_url = "{{ URL::route('ajax.getinvoices') }}";
     var selected_url = "{{ URL::route('ajax.selectedinvoice') }}";
+    var emptySelected_url = "{{ URL::route('ajax.emptyselectedinvoice') }}";
+    var addSelected_url = "{{ URL::route('ajax.addselectedinvoice') }}";
+    var addinvoice_url = "{{ URL::route('invoice.add') }}";
 </script>
 
 @endsection

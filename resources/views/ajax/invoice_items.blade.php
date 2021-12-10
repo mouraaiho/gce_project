@@ -25,7 +25,13 @@
             <td>{{ $d->value }}</td>
             <td>{{ $d->price }}</td>
             <td>{{ ($d->status) ? 'مؤذات' : 'غير مؤذات' }}</td>
-            <td>{!! ($d->status) ? '' : '<input type="checkbox" class="selectID" value="'. $d->inumber.'" />' !!}</td>
+            <td>
+              @if($d->status)
+                {{ "" }}
+              @else
+              <input type="checkbox" class="selectID" {{ (strpos($invoiceList,strval($d->id)) !== false) ? "checked":""  }} value="{{ $d->id }}" />
+              @endif
+            </td>
         </tr>
     @endforeach
     </tbody>
@@ -34,7 +40,7 @@
   <ul class="pagination pagination-primary">
       <?php for($i = 1 ; $i <= $data['invoices']['totalPages']; $i++){ ?>
           <?php if ($i >= $data['currPage'] -2 && $i <= $data['currPage'] +2){ ?>
-              <li class="page-item {{ ( $i == $data['currPage']) ? 'active':'' }}"><a class="page-link pageNumber {{ ( $i == $data['currPage']) ? 'InvoiceActivePage':'' }}" value="{{ $i }}" href="">{{ $i }}</a></li>
+              <li class="page-item {{ ( $i == $data['currPage']) ? 'active':'' }}"><a class="page-link pageInvoiceNumber {{ ( $i == $data['currPage']) ? 'InvoiceActivePage':'' }}" value="{{ $i }}" href="#">{{ $i }}</a></li>
           <?php } ?>
       <?php } ?>
   </ul>

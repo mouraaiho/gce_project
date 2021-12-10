@@ -83,7 +83,8 @@ class AjaxController extends Controller
       $status = true;
       $data['invoices'] = Invoice::getInvoicesBy($currPage, $year,$month, $client_name , $counter_number , $invoice_number, $type_invoice);
       $data['currPage'] = $currPage;
-      return view("ajax.invoice_items", ['data' => $data ]);
+      $invoiceList  = $request->session()->get('invoiceList', '');
+      return view("ajax.invoice_items", ['data' => $data ,'invoiceList' => $invoiceList]);
     }
 
 
@@ -95,19 +96,36 @@ class AjaxController extends Controller
       return Response::json(array('success' => $status), 200);
     }
 
+    public function emptySelectedInvoice(Request $request){
+      $request->session()->forget('invoiceList');
+      $status = true;
+      return Response::json(array('success' => $status), 200);
+    }
+
+    public function addSelectedInvoice(Request $request){
+      $status = true;
+      $invoiceList   = $request->session()->get('invoiceList', '');
+      if($invoiceList == ''){
+        $status = false;
+      }else{
+        $status = Invoice::checkInvoiceCounterNumber($invoiceList);
+      }
+      return Response::json(array('status' => $status), 200);
+    }
+
     public function selectedInvoice(Request $request){
       $checkboxVal   = $request->input('checkboxVal');
+      $checkboxVal   = $checkboxVal === 'true'? true: false;
       $invoice_id    = $request->input('invoice_id');
-      $request->session()->get('invoiceList', array());
+      $invoiceList   = $request->session()->get('invoiceList', '');
       if($checkboxVal){
-        $invoiceList = array();
-        array_push($invoiceList, $invoice_id);
-        $request->session()->push('invoiceList', $invoiceList);
+        $invoiceList = $invoiceList . $invoice_id .";";
+        $request->session()->put('invoiceList', $invoiceList);
       }else{
-        $invoiceList = $request->session()->get('invoiceList');
-        $invoiceList = \array_diff($invoiceList, $invoice_id);
+        $invoiceList = str_replace($invoice_id .";","",$invoiceList);
+        $request->session()->put('invoiceList', $invoiceList);
       }
       $invoiceList = $request->session()->get('invoiceList');
-      return Response::json(array('invoiceList' => $invoiceList), 200);
+      return Response::json(array('invoiceList' => $invoiceList,'checkboxVal' => $checkboxVal), 200);
     }
 }

@@ -148,7 +148,29 @@ class Invoice extends Model
       }
 
 
+      static function checkInvoiceCounterNumber($invoiceList){
+        if ($invoiceList == '') {
+          return false;
+        }else{
+          $invoiceList = rtrim(str_replace(";",",",$invoiceList),",");
+          $idList = explode(',', $invoiceList);
+          $records =  DB::table('clients')
+                        ->join('counters', 'clients.id', '=', 'counters.client_id')
+                        ->join('consumptions', 'counters.id', '=', 'consumptions.counter_id')
+                        ->whereIn('invoices.id', $idList)
+                        ->join('invoices', 'consumptions.id', '=', 'invoices.consumption_id')
+                        ->select('counters.number')
+                        ->groupBy('counters.number')
+                        ->get();
+          if(count($records) == 1){
+            return true;
+          }else {
+            return false;
+          }
+        }
 
+
+      }
 
 
 }

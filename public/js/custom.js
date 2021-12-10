@@ -182,7 +182,7 @@ $(document).ready(function () {
         });
     });
 
-    $('#dataupdate').on('click', '.pageNumber', function(event) {
+    $('#dataupdate').on('click', '.pageInvoiceNumber', function(event) {
         event.preventDefault();
         var pageNumber = $(this).attr("value");
         console.log('Clicked!');
@@ -248,7 +248,24 @@ $(document).ready(function () {
         });
     });
 
-    $(".selectID").change(function() {
+
+    $('#empty-invoice-btn').on('click', function(event) {
+        console.log('Clicked!');
+        $.ajax({
+            type: "get",
+            url: emptySelected_url,
+            success: function (data) {
+              $('.selectID').prop('checked', false); // Unchecks it
+                console.log(data);
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr);
+            }
+        });
+    });
+
+
+    $('#dataupdate').on('change', '.selectID', function(event) {
       var checkboxVal = false
         if(this.checked) {
             checkboxVal = true
@@ -303,6 +320,24 @@ $(document).ready(function () {
     });
 
 
+    $('#add-invoice-btn').on('click', function(event) {
+        console.log('Clicked!');
+        $.ajax({
+            type: "get",
+            url: addSelected_url,
+            success: function (data) {
+              if(data.status == true){
+                window.location.href = addinvoice_url;
+              }else{
+                alert('لقد اخترت فواتير لعدة عدادات مختلفة المرجو التاكد قبل عملية الاداء')
+              }
+                console.log(data);
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr);
+            }
+        });
+    });
 
 
 });
