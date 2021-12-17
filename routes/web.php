@@ -69,7 +69,7 @@ Route::get('/consumption/updateconsumption', 'AjaxController@updateConsumption')
  * **/
 Route::get('/invoice','InvoiceController@index')->name('invoice.index');
 Route::get('/invoice/add','InvoiceController@add')->name('invoice.add');
-Route::get('/invoice/save','InvoiceController@save')->name('invoice.save');
+Route::post('/invoice/save','InvoiceController@save')->name('invoice.save');
 Route::get('/invoice/delete','InvoiceController@delete')->name('invoice.delete');
 Route::get('/invoice/getinvoices', 'AjaxController@invoices')->name("ajax.getinvoices");
 Route::get('/invoice/selectedinvoice', 'AjaxController@selectedInvoice')->name("ajax.selectedinvoice");
@@ -84,6 +84,7 @@ Route::get('/invoice/updateinvoice', 'AjaxController@updateInvoice')->name("ajax
 Route::get('/payment','PaymentController@index')->name('payment.index');
 Route::get('/payment/edit','PaymentController@edit')->name('payment.edit');
 Route::get('/payment/delete','PaymentController@delete')->name('payment.delete');
+Route::get('/payment/printreceipt','PaymentController@printReceipt')->name('payment.printreceipt');
 Route::get('/payment/getpayments', 'AjaxController@payments')->name("ajax.getpayments");
 Route::get('/payment/updatepayment', 'AjaxController@updatePayment')->name("ajax.updatepayment");
 /**

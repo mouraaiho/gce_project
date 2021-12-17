@@ -168,9 +168,27 @@ class Invoice extends Model
             return false;
           }
         }
-
-
       }
 
+      static function getInvoiceById($invoiceList){
+        $invoiceList = rtrim(str_replace(";",",",$invoiceList),",");
+        $idList = explode(',', $invoiceList);
+        $records =  DB::table('clients')
+                      ->join('counters', 'clients.id', '=', 'counters.client_id')
+                      ->join('consumptions', 'counters.id', '=', 'consumptions.counter_id')
+                      ->whereIn('invoices.id', $idList)
+                      ->join('invoices', 'consumptions.id', '=', 'invoices.consumption_id')
+                      ->select('clients.cin', 'clients.name', 'clients.subscription_fees','counters.number as cnumber' , 'consumptions.month', 'consumptions.year', 'consumptions.value', 'invoices.id', 'invoices.number as inumber', 'invoices.price', 'invoices.status')
+                      ->get();
+        return $records;
+      }
+
+      static function UpdateStatus($invoice_id){
+        DB::table('invoices')
+        ->Where([['id','=', $invoice_id]])
+        ->update(
+            ['status' => 1]
+        );
+      }
 
 }

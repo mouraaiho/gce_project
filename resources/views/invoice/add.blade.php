@@ -3,6 +3,7 @@
 @section('content')
 @push('styles')
     <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendors/print/print.min.css') }}" rel="stylesheet">
 @endpush
 <header class="mb-3">
     <a href="#" class="burger-btn d-block d-xl-none">
@@ -38,6 +39,30 @@
                                         @endif
                                         <form action="{{ route('invoice.save')}}" method="post">
                                         @csrf
+                                          <div class="row">
+                                              <div class="col-md-6">
+                                                  <div class="form-group row align-items-center">
+                                                      <div class="col-lg-3 col-3">
+                                                          <label class="col-form-label">اسم المشرك</label>
+                                                      </div>
+                                                      <div class="col-lg-9 col-9">
+                                                          <input type="text"  class="form-control" name="client_name" value="{{ $data[0]->name }}" placeholder="اسم المشرك">
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="row">
+                                              <div class="col-md-6">
+                                                  <div class="form-group row align-items-center">
+                                                      <div class="col-lg-3 col-3">
+                                                          <label class="col-form-label">رقم البطاقة الوطنية</label>
+                                                      </div>
+                                                      <div class="col-lg-9 col-9">
+                                                          <input type="text"  class="form-control" name="client_cin" value="{{ $data[0]->cin }}" placeholder="رقم البطاقة الوطنية">
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group row align-items-center">
@@ -45,38 +70,7 @@
                                                             <label class="col-form-label">رقم العداد</label>
                                                         </div>
                                                         <div class="col-lg-9 col-9">
-                                                            <input type="text" class="form-control" name="number" placeholder="رقم العداد">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                  <div class="form-group row align-items-center">
-                                                      <div class="col-lg-3 col-3">
-                                                          <label class="col-form-label">حالة العداد</label>
-                                                      </div>
-                                                      <div class="col-lg-9 col-9">
-                                                        <div class="form-check form-check-inline">
-                                                          <input class="form-check-input" type="radio" checked name="active" id="inlineRadio1" value="1">
-                                                          <label class="form-check-label" for="inlineRadio1">يعمل</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                          <input class="form-check-input" type="radio" name="active" id="inlineRadio2" value="0">
-                                                          <label class="form-check-label" for="inlineRadio2">لا يعمل</label>
-                                                        </div>
-                                                      </div>
-                                                  </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group row align-items-center">
-                                                        <div class="col-lg-3 col-3">
-                                                            <label class="col-form-label">تاريخ البداء</label>
-                                                        </div>
-                                                        <div class="col-lg-9 col-9">
-                                                            <input type="date"  class="form-control" name="start_date" placeholder="تاريخ البداء">
+                                                            <input type="text" class="form-control" name="number" value="{{ $data[0]->cnumber }}" placeholder="رقم العداد">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -85,10 +79,16 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group row align-items-center">
                                                         <div class="col-lg-3 col-3">
-                                                            <label class="col-form-label">القيمة البدئية</label>
+                                                            <label class="col-form-label">مبلغ الاداء</label>
                                                         </div>
                                                         <div class="col-lg-9 col-9">
-                                                            <input type="number" class="form-control" name="itial_consumption" placeholder="القيمة البدئية">
+                                                          <?php
+                                                            $total_price = 0;
+                                                            foreach ($data as $d) {
+                                                              $total_price = $total_price + $d->price;
+                                                            }
+                                                           ?>
+                                                            <input type="text" class="form-control" name="total_price" value="{{ $total_price }}" placeholder="مبلغ الاشتراك">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -97,10 +97,22 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group row align-items-center">
                                                         <div class="col-lg-3 col-3">
-                                                            <label class="col-form-label">تاريخ الإقاف</label>
+                                                            <label class="col-form-label">اخر اجل للدفع</label>
                                                         </div>
                                                         <div class="col-lg-9 col-9">
-                                                            <input type="date" class="form-control" name="end_date" placeholder="تاريخ الإقاف">
+                                                            <input type="date" class="form-control" name="pinality_date" placeholder="اخر اجل للدفع">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group row align-items-center">
+                                                        <div class="col-lg-3 col-3">
+                                                            <label class="col-form-label">مبلغ الغرامة</label>
+                                                        </div>
+                                                        <div class="col-lg-9 col-9">
+                                                            <input type="text" class="form-control" name="pinality_price"  placeholder="مبلغ الغرامة">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -112,11 +124,44 @@
 
                                                         </div>
                                                         <div class="col-lg-9 col-9">
-                                                            <input type="submit" class="btn btn-primary" name="submit" />
-                                                            <input type="reset" class="btn btn-info" name="reset" />
+                                                            <button type="submit" class="btn btn-primary">اداء الفاتورة</button>
+                                                            <button type="reset" class="btn btn-info">الغاء الاداء</button>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="row">
+                                              <div class="table-responsive" id="dataupdate">
+                                                  <table class="table table-striped" id="table1">
+                                                      <thead class="thead-dark">
+                                                          <tr>
+                                                              <th>رقم الفاتورة</th>
+                                                              <th>رقم العداد</th>
+                                                              <th>البطاقة الوطنية</th>
+                                                              <th>اسم المشرك</th>
+                                                              <th>مبلغ الاشتراك</th>
+                                                              <th>شهر الاستهلاك</th>
+                                                              <th>الاستهلاك الشهري</th>
+                                                              <th>ثمن الفاتورة</th>
+                                                              <th>اداء الفاتورة</th>
+                                                          </tr>
+                                                      </thead>
+                                                      <tbody>
+                                                        @foreach($data as $d)
+                                                          <tr>
+                                                              <td>{{ $d->inumber }}</td>
+                                                              <td>{{ $d->cnumber }}</td>
+                                                              <td>{{ $d->cin }}</td>
+                                                              <td>{{ $d->name }}</td>
+                                                              <td>{{ $d->subscription_fees }}</td>
+                                                              <td>{{ $d->month .'/'. $d->year }}</td>
+                                                              <td>{{ $d->value }}</td>
+                                                              <td>{{ $d->price }}</td>
+                                                              <td>{{ ($d->status) ? 'مؤذات' : 'غير مؤذات' }}</td>                                                          </tr>
+                                                        @endforeach
+                                                      </tbody>
+                                                  </table>
+                                              </div>
                                             </div>
                                         </form>
                                     </div>
@@ -140,7 +185,15 @@
         </div>
     </div>
 </footer>
-<script type="text/javascript">
-    var main_url = "{{ URL::route('ajax.getclients') }}";
-</script>
+@push('scripts')
+  <script type="text/javascript" src="{{ asset('assets/vendors/print/print.min.js') }}"></script>
+  <script type="text/javascript">
+      var main_url = "{{ URL::route('payment.printreceipt') }}";
+      @if($status =='success')
+      var W = window.open(main_url + "/?payment_id=739");
+      W.window.print();
+      setTimeout(function () { window.close(); }, 100);
+      @endif
+  </script>
+@endpush
 @endsection

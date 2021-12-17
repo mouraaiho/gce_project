@@ -14,4 +14,14 @@ class PaymentController extends Controller
         $data['currPage'] = $currPage;
       return view("payment.list", ['data' => $data]);
     }
+
+    public function printReceipt(Request $request){
+      if(!empty($request->input('payment_id'))){
+          $payment_id = $request->input('payment_id');
+          $data = Payment::getPaymentById($payment_id);
+          return view("payment.print_receipt", ['data' => $data]);
+      }else {
+
+      }
+    }
 }

@@ -339,5 +339,22 @@ $(document).ready(function () {
         });
     });
 
+    function printreceipt(){
+      $.ajax({
+          type: "get",
+          url: main_url,
+          data: {
+              payment_id : 740,
+          },
+          success: function (data) {
+            printJS({ printable: data, type: 'html', header: 'PrintJS - Form Element Selection' });
+            console.log(data);
+          },
+          error: function (xhr, status, error) {
+              console.error(xhr);
+          }
+      });
+    }
+
 
 });
