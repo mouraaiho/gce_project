@@ -26,13 +26,16 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group row align-items-center">
-                                                    <div class="col-lg-2 col-3">
-                                                        <label class="col-form-label">اسم المشرك</label>
+                                                    <div class="col-lg-4">
+                                                        <label class="col-form-label">اسم المشرك او رقم العداد</label>
                                                     </div>
-                                                    <div class="col-lg-10 col-9">
-                                                        <input type="text" id="search-field" class="form-control" name="fname" placeholder="اسم المشرك  للبحث">
+                                                    <div class="col-lg-5">
+                                                        <input type="text" id="search-field" class="form-control" name="fname" placeholder="اسم المشرك او رقم العداد">
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <a href="{{ route('counter.add')}}" class="btn btn-info">إضافة عداد جديد</a>
                                             </div>
                                         </div>
                                       <div class="table-responsive" id="dataupdate">

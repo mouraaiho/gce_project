@@ -42,8 +42,9 @@ class AjaxController extends Controller
         $currPage = $request->input('pageN');
         $month   = $request->input('month');
         $year   = $request->input('year');
+        $searchField   = $request->input('searchField');
         #create or update your data here
-        $data['consumptions'] = Consumption::getAllConsumptions($currPage,15, $month, $year);
+        $data['consumptions'] = Consumption::getAllConsumptions($currPage,15, $month, $year, $searchField);
         $data['currPage'] = $currPage;
         return view("ajax.consumption_items", ['data' => $data ]);
     }

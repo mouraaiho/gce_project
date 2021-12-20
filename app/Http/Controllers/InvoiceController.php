@@ -23,14 +23,17 @@ class InvoiceController extends Controller
       $data = Invoice::getInvoiceById($invoiceList);
       $status = '';
       $message = '';
+      $payment_id = '';
       if(!empty($request->input('success'))){
           $status = 'success';
           $message = $request->input('success');
+          $payment_id = $request->input('payment_id');
+          $request->session()->forget('invoiceList');
       }elseif (!empty($request->input('error'))) {
         $status = 'error';
         $message = $request->input('error');
       }
-      return view("invoice.add", ['data' => $data,'status' => $status, 'message' => $message]);
+      return view("invoice.add", ['data' => $data,'status' => $status, 'message' => $message, 'payment_id' => $payment_id]);
     }
     public function save(Request $request){
       $method = $request->method();
@@ -47,8 +50,7 @@ class InvoiceController extends Controller
               Invoice::UpdateStatus($invoice_id);
               InvoPayment::addInvoPayment($payment_id, $invoice_id);
             }
-            $request->session()->forget('invoiceList');
-            return redirect()->route('invoice.add',['success' => 'تم اداء الفواتير بنجاح']);
+            return redirect()->route('invoice.add',['success' => 'تم اداء الفواتير بنجاح','payment_id' => $payment_id]);
           }else{
             return redirect()->route('invoice.add',['error' => 'هناك خطأ في العملية المرجو التأكد من المعلومات']);
           }

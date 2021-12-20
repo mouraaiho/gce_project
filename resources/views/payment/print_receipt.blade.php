@@ -1,38 +1,50 @@
-<html>
-<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/app.rtl.css') }}">
+@extends('layout', ['current_menu' => 'invoice'])
+@section('Title', 'Invoice Add')
+@section('content')
+@push('styles')
+    <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendors/print/print.min.css') }}" rel="stylesheet">
+@endpush
 <style>
-@media print {
-
 #A5-canvas{
-  width: 559px;
-  height: 794px;
-  text-align: center;
+    background-color: white;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
 }
-.table{
-  border-color: #ddd;
-  width: 550px;
-  margin: 5px;
-}
-table tr th{
-  text-align: center;
-  vertical-align: middle;
-}
-table tr td{
-  text-align: right;
-  vertical-align: middle;
-}
-.logo-img {
-  text-align: right;
-  margin: 10px;
-}
-h6{
-  text-align: right;
-  margin: 10px;
-}
+@media print {
+  #sidebar,#close-me, footer{ display:none; }
+  #A5-canvas,#app,#main{
+    width: 559px;
+    height: 794px;
+    text-align: center;
+    display:block;
+    padding: 0;
+    margin: 0;
+  }
+  .table{
+    border-color: #ddd;
+    width: 550px;
+    margin: 5px;
+  }
+  table tr th{
+    text-align: center;
+    vertical-align: middle;
+  }
+  table tr td{
+    text-align: right;
+    vertical-align: middle;
+  }
+  .logo-img {
+    text-align: right;
+    margin: 10px;
+  }
+  h6{
+    text-align: right;
+    margin: 10px;
+  }
 }
 </style>
-<body>
   <div id="A5-canvas">
     <p class="logo-img">جمعية المستقبل و التنمية لتاكريامت</p>
     <img src="{{ asset('assets/images/logo/assoiciation_logo.png') }}" width="50" height="50">
@@ -72,6 +84,23 @@ h6{
         </td>
       </tr>
     </table>
+    <input id="close-me" type="button" class="btn btn-success" onclick="javascript:window.close('','_parent','');" value="اغلاق النافدة" />
   </div>
-</body>
-</html>
+
+<footer>
+<div class="footer clearfix mb-0 text-muted">
+<div class="float-start">
+<p>2021 &copy; GCE Project</p>
+</div>
+<div class="float-end">
+<p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
+    href="#">MegaNova Technologies LTD</a></p>
+</div>
+</div>
+</footer>
+@push('scripts')
+<script type="text/javascript">
+
+</script>
+@endpush
+@endsection

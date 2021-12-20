@@ -88,7 +88,7 @@
                                                               $total_price = $total_price + $d->price;
                                                             }
                                                            ?>
-                                                            <input type="text" class="form-control" name="total_price" value="{{ $total_price }}" placeholder="مبلغ الاشتراك">
+                                                            <input type="text" class="form-control" name="total_price" value="{{ $total_price }}" placeholder="مبلغ الاشتراك" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -97,10 +97,10 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group row align-items-center">
                                                         <div class="col-lg-3 col-3">
-                                                            <label class="col-form-label">اخر اجل للدفع</label>
+                                                            <label class="col-form-label">تاريخ الاداء</label>
                                                         </div>
                                                         <div class="col-lg-9 col-9">
-                                                            <input type="date" class="form-control" name="pinality_date" placeholder="اخر اجل للدفع">
+                                                            <input type="date" id="datePicker" class="form-control" name="pinality_date" placeholder="اخر اجل للدفع" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -112,7 +112,7 @@
                                                             <label class="col-form-label">مبلغ الغرامة</label>
                                                         </div>
                                                         <div class="col-lg-9 col-9">
-                                                            <input type="text" class="form-control" name="pinality_price"  placeholder="مبلغ الغرامة">
+                                                            <input type="number" class="form-control" min="0" value="0" name="pinality_price"  placeholder="مبلغ الغرامة" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -154,8 +154,8 @@
                                                               <td>{{ $d->cin }}</td>
                                                               <td>{{ $d->name }}</td>
                                                               <td>{{ $d->subscription_fees }}</td>
-                                                              <td>{{ $d->month .'/'. $d->year }}</td>
-                                                              <td>{{ $d->value }}</td>
+                                                              <td>{{ $d->month_consumption .'/'. $d->year_consumption }}</td>
+                                                              <td>{{ $d->value_consumption }}</td>
                                                               <td>{{ $d->price }}</td>
                                                               <td>{{ ($d->status) ? 'مؤذات' : 'غير مؤذات' }}</td>                                                          </tr>
                                                         @endforeach
@@ -189,10 +189,11 @@
   <script type="text/javascript" src="{{ asset('assets/vendors/print/print.min.js') }}"></script>
   <script type="text/javascript">
       var main_url = "{{ URL::route('payment.printreceipt') }}";
+      document.getElementById('datePicker').valueAsDate = new Date();
+
       @if($status =='success')
-      var W = window.open(main_url + "/?payment_id=739");
+      var W = window.open(main_url + "/?payment_id={{ $payment_id}}");
       W.window.print();
-      setTimeout(function () { window.close(); }, 100);
       @endif
   </script>
 @endpush

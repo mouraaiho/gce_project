@@ -85,6 +85,7 @@ $(document).ready(function () {
         var pageNumber = 1;
         var year = $('#this-year').val();
         var month = $('#this-month').val();
+        var searchField  = $('#search-field').val();
         $.ajax({
             type: "get",
             url: main_url,
@@ -92,6 +93,7 @@ $(document).ready(function () {
                 pageN : pageNumber,
                 month : month,
                 year  : year,
+                searchField : searchField,
             },
             success: function (data) {
                 $('#dataupdate').html("");

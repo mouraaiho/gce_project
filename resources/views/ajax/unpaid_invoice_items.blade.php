@@ -20,8 +20,8 @@
             <td>{{ $d->cin }}</td>
             <td>{{ $d->name }}</td>
             <td>{{ $d->subscription_fees }}</td>
-            <td>{{ $d->month .'/'. $d->year }}</td>
-            <td>{{ $d->value }}</td>
+            <td>{{ $d->month_consumption .'/'. $d->year_consumption }}</td>
+            <td>{{ $d->value_consumption }}</td>
             <td>{{ $d->price }}</td>
             <td>{{ ($d->status) ? 'مؤذات' : 'غير مؤذات' }}</td>
         </tr>

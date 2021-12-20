@@ -35,7 +35,8 @@ class Counter extends Model
         $data['result'] = DB::table('counters')
         ->select('clients.id as clientId', 'counters.id as counterId', 'clients.name', 'clients.cin','counters.id', 'counters.number', 'counters.itial_consumption', 'counters.start_date', 'counters.active', 'counters.end_date')
         ->join('clients', 'clients.id', '=', 'counters.client_id')
-        ->orWhere('name' , 'like' , '%'. $searchField .'%')
+        ->orWhere('clients.name' , 'like' , '%'. $searchField .'%')
+        ->orWhere('counters.number' , 'like' , '%'. $searchField .'%')
         ->offset($startAt)
         ->limit($perPage)->get();
       }

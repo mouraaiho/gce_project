@@ -14,6 +14,10 @@ class Config extends Model
       return  DB::table('configs')->get();;
     }
 
+    static function getConfigByName($name){
+      return  DB::table('configs')->Where('name' , $name)->first();
+    }
+
     static function updateConfig($name, $value){
       DB::table('configs')
         ->Where('name' , $name)

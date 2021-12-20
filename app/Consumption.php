@@ -17,9 +17,9 @@ class Consumption extends Model
       return $this->hasMany(Invoice::class);
     }
 
-    static function getAllConsumptions($page = 1, $perPage = 15, $month = 1 ,$year = 2020){
+    static function getAllConsumptions($page = 1, $perPage = 15, $month = 1 ,$year = 2020, $searchField = ''){
 
-      $counters = Counter::getAllCounters($page, $perPage);
+      $counters = Counter::getAllCounters($page, $perPage, $searchField);
       $data["result"]  = array();
       $data['totalPages'] = $counters['totalPages'];
       foreach($counters['result'] as $d){
@@ -29,7 +29,7 @@ class Consumption extends Model
           ->Where('month' , ($month - 1))
           ->Where('counter_id' , $d->counterId)
           ->get();
-  
+
           $thisconsumption = DB::table('consumptions')
           ->Where('year' , $year)
           ->Where('month' , $month)
@@ -48,7 +48,7 @@ class Consumption extends Model
           ->Where('counter_id' , $d->counterId)
           ->get();
         }
-        
+
 
         $row = array();
         $row['counter_id'] = $d->counterId;
@@ -73,9 +73,9 @@ class Consumption extends Model
     static function AddConsumption($counter_id, $month , $year , $value){
      return  DB::table('consumptions')->insertGetId(
             [
-              'counter_id' => $counter_id , 
-              'month' => $month , 
-              'year' => $year , 
+              'counter_id' => $counter_id ,
+              'month' => $month ,
+              'year' => $year ,
               'value' => $value,
             ]
         );
