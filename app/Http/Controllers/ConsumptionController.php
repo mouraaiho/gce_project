@@ -14,4 +14,12 @@ class ConsumptionController extends Controller
         $data['currPage'] = $currPage;
       return view("consumption.list", ['data' => $data]);
     }
+
+    public function printMonthConsumption(Request $request){
+          $month   = $request->input('month');
+          $year   = $request->input('year');
+          $data['consumptions'] = Consumption::getAllConsumptions(1,4000, $month, $year);
+          return view("consumption.print_list_month_consumption", ['data' => $data ,'year'=>$year,'month'=>$month]);
+
+    }
 }

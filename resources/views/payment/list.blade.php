@@ -88,27 +88,25 @@
                                                       <th>رقم العداد</th>
                                                       <th>البطاقة الوطنية</th>
                                                       <th>اسم المشرك</th>
-                                                      <th>مبلغ الاشتراك</th>
-                                                      <th>شهر الاستهلاك</th>
-                                                      <th>الاستهلاك الشهري</th>
-                                                      <th>ثمن الفاتورة</th>
-                                                      <th>اداء الفاتورة</th>
+                                                      <th>مجموع ملبغ الاداض</th>
+                                                      <th>تاريخ الاداء</th>
+                                                      <th>ملبغ الغرامة</th>
                                                       <th>اختيارات</th>
                                                   </tr>
                                               </thead>
                                               <tbody>
-                                                @foreach($data['payments']['result'] as $d)
+                                                @foreach($data['payments']['data'] as $key => $d)
                                                   <tr>
-                                                      <td>{{ $d->inumber }}</td>
-                                                      <td>{{ $d->cnumber }}</td>
-                                                      <td>{{ $d->cin }}</td>
-                                                      <td>{{ $d->name }}</td>
-                                                      <td>{{ $d->subscription_fees }}</td>
-                                                      <td>{{ $d->month .'/'. $d->year }}</td>
-                                                      <td>{{ $d->value }}</td>
-                                                      <td>{{ $d->price }}</td>
-                                                      <td>{{ ($d->status) ? 'مؤذات' : 'غير مؤذات' }}</td>
-                                                      <td></td>
+                                                      <td>{{ $data['payments']['details'][$key][0]->inumber }}</td>
+                                                      <td>{{ $data['payments']['details'][$key][0]->cnumber }}</td>
+                                                      <td>{{ $data['payments']['details'][$key][0]->cin }}</td>
+                                                      <td>{{ $data['payments']['details'][$key][0]->name }}</td>
+                                                      <td>{{ $data['payments']['details'][$key][0]->total_price }}</td>
+                                                      <td>{{ $data['payments']['details'][$key][0]->pinality_date }}</td>
+                                                      <td>{{ $data['payments']['details'][$key][0]->pinality_price }}</td>
+                                                      <td>
+                                                        <a href="{{ url('payment/detailspayment/?payment_id=' . $data['payments']['details'][$key][0]->id)}}" class="btn btn-primary">قائمة الفواتير</a>
+                                                      </td>
                                                   </tr>
                                                 @endforeach
                                               </tbody>

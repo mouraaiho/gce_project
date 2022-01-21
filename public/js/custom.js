@@ -359,4 +359,10 @@ $(document).ready(function () {
     }
 
 
+    $('#print-consumption-btn').on('click', function(event) {
+      var year = $('#this-year').val();
+      var month = $('#this-month').val();
+      window.location.href = print_url + "?year="+ year+ "&month="+month;
+    });
+
 });

@@ -62,6 +62,7 @@ Route::get('/consumption/edit','ConsumptionController@edit')->name('consumption.
 Route::get('/consumption/delete','ConsumptionController@delete')->name('consumption.delete');
 Route::get('/consumption/getconsumptions', 'AjaxController@consumptions')->name("ajax.getconsumptions");
 Route::get('/consumption/updateconsumption', 'AjaxController@updateConsumption')->name("ajax.updateconsumption");
+Route::get('/consumption/printlistmonthconsumption','ConsumptionController@printMonthConsumption')->name('consumption.printlistmonthconsumption');
 /**
  *
  * Invoice routes
@@ -87,6 +88,7 @@ Route::get('/payment/delete','PaymentController@delete')->name('payment.delete')
 Route::get('/payment/printreceipt','PaymentController@printReceipt')->name('payment.printreceipt');
 Route::get('/payment/getpayments', 'AjaxController@payments')->name("ajax.getpayments");
 Route::get('/payment/updatepayment', 'AjaxController@updatePayment')->name("ajax.updatepayment");
+Route::get('/payment/detailspayment', 'PaymentController@detailsPayment')->name("payment.detailspayment");
 /**
  *
  * Config routes
@@ -94,6 +96,10 @@ Route::get('/payment/updatepayment', 'AjaxController@updatePayment')->name("ajax
  * **/
 Route::get('/config','ConfigController@index')->name('config.index');
 Route::get('/config/updateconfig', 'AjaxController@updateConfig')->name("ajax.updateconfig");
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

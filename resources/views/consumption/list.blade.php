@@ -83,7 +83,7 @@
                                                   <a href="#" id="search-btn" class="btn btn-success" >البحث</a>
                                               </div>
                                               <div class="col-md-3">
-                                                  <a href="#" id="search-btn" class="btn btn-warning" >طبع دليل الشهر الحالي</a>
+                                                  <a href="#" id="print-consumption-btn" class="btn btn-warning" >طبع دليل الشهر الحالي</a>
                                               </div>
                                       </div>
                                       <div class="table-responsive" id="dataupdate">
@@ -144,6 +144,7 @@
 <script type="text/javascript">
     var main_url = "{{ URL::route('ajax.getconsumptions') }}";
     var update_url = "{{ URL::route('ajax.updateconsumption') }}";
+    var print_url = "{{ URL::route('consumption.printlistmonthconsumption') }}";
 </script>
 
 @endsection

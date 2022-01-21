@@ -21,7 +21,18 @@ class PaymentController extends Controller
           $data = Payment::getPaymentById($payment_id);
           return view("payment.print_receipt", ['data' => $data]);
       }else {
-
+        return redirect('dashboard.index');
       }
     }
+
+    public function detailsPayment(Request $request){
+      if(!empty($request->input('payment_id'))){
+          $payment_id = $request->input('payment_id');
+          $data = Payment::getPaymentById($payment_id);
+          return view("payment.details_payment", ['data' => $data]);
+      }else {
+        return redirect('dashboard.index');
+      }
+    }
+
 }
